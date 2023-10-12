@@ -9,6 +9,8 @@ export const saveImage = (req, res, next) => {
 
   try {
 
+    const { fileName } = req.query
+
     const form = new Form()
 
     form.on('part', part => {
@@ -31,7 +33,7 @@ export const saveImage = (req, res, next) => {
             })
         }
 
-        const name = `${new Date().getTime().toString()}`
+        const name = `${fileName}-${new Date().getTime().toString()}`
 
         const saveTo = resolve(__dirname, `../public/imgs/temp/${name}.${extension}`)
 

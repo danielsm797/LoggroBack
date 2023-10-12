@@ -33,7 +33,10 @@ ConversionSchema.statics.searchByFilter = async function ({ filter, fields }) {
 
   try {
 
-    obj.dta = await this.find(filter, fields).lean()
+    obj.dta = await this
+      .find(filter, fields)
+      .sort({ createdAt: -1 })
+      .lean()
 
   } catch (error) {
 
@@ -45,7 +48,7 @@ ConversionSchema.statics.searchByFilter = async function ({ filter, fields }) {
   return obj;
 }
 
-ConversionSchema.statics.searchGroupByHour = async function () {
+ConversionSchema.statics.searchGroupByHour = async function ({ start, end }) {
 
   const obj = {
     dta: null,
@@ -57,15 +60,38 @@ ConversionSchema.statics.searchGroupByHour = async function () {
     obj.dta = await this.aggregate(
       [
         {
+          $match:
+          {
+            createdAt:
+            {
+              $gte: start,
+              $lte: end
+            }
+          }
+        },
+        {
+          $addFields:
+          {
+            dateSub:
+            {
+              $dateSubtract:
+              {
+                startDate: '$createdAt',
+                unit: "hour",
+                amount: 5
+              }
+            }
+          }
+        },
+        {
           $addFields:
           {
             hora:
             {
               $dateToString:
               {
-                // format: "%Y%m%d%H",
                 format: "%H",
-                date: "$createdAt"
+                date: '$dateSub'
               }
             }
           }

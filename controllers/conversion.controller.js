@@ -8,10 +8,10 @@ export const convert = async (req, res) => {
 
     const { extension, name } = req.imageInfo
 
-    const { user } = req.query
+    const { userName } = req.query
 
     const doc = {
-      user,
+      user: userName,
       path: `${name}.png`,
       prevExtension: extension
     }
@@ -96,7 +96,12 @@ export const searchGroupByHour = async (req, res) => {
 
   try {
 
-    const result = await Conversion.searchGroupByHour()
+    const { fi, ff } = req.query
+
+    const start = DateTime.fromISO(fi).toUTC()
+    const end = DateTime.fromISO(ff).toUTC()
+
+    const result = await Conversion.searchGroupByHour({ start, end })
 
     if (result.err) {
       throw result.dta
