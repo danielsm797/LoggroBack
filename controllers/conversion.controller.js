@@ -91,3 +91,34 @@ export const searchByDates = async (req, res) => {
       })
   }
 }
+
+export const searchGroupByHour = async (req, res) => {
+
+  try {
+
+    const result = await Conversion.searchGroupByHour()
+
+    if (result.err) {
+      throw result.dta
+    }
+
+    res
+      .status(200)
+      .json({
+        success: true,
+        message: 'Query has been successfully!',
+        object: result.dta
+      })
+
+  } catch (error) {
+
+    logger.error(`❎ [searchGroupByHour] -> ${error}`)
+
+    res
+      .status(500)
+      .json({
+        success: false,
+        message: 'Has been occurred an error, please try more late'
+      })
+  }
+}

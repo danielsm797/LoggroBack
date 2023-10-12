@@ -45,4 +45,58 @@ ConversionSchema.statics.searchByFilter = async function ({ filter, fields }) {
   return obj;
 }
 
+ConversionSchema.statics.searchGroupByHour = async function () {
+
+  const obj = {
+    dta: null,
+    err: false
+  };
+
+  try {
+
+    obj.dta = await this.aggregate(
+      [
+        {
+          $addFields:
+          {
+            hora:
+            {
+              $dateToString:
+              {
+                // format: "%Y%m%d%H",
+                format: "%H",
+                date: "$createdAt"
+              }
+            }
+          }
+        },
+        {
+          $group:
+          {
+            _id: '$hora',
+            count:
+            {
+              $count: {}
+            }
+          }
+        },
+        {
+          $sort:
+          {
+            _id: 1
+          }
+        }
+      ]
+    )
+
+  } catch (error) {
+
+    obj.dta = error;
+
+    obj.err = true;
+  }
+
+  return obj;
+}
+
 export const Conversion = model('Conversion', ConversionSchema)
