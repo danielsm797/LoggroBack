@@ -1,0 +1,31 @@
+{
+  "name": "loggroback",
+  "version": "1.0.0",
+  "description": "Servicio que se encarga de convertir imágenes en formato .jpg o .jpeg a .png y registrar las métricas",
+  "main": "db.js",
+  "scripts": {
+    "start": "nodemon db.js"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/danielsm797/LoggroBack.git"
+  },
+  "author": "Daniel Eduardo Sampayo Morelo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielsm797/LoggroBack/issues"
+  },
+  "homepage": "https://github.com/danielsm797/LoggroBack#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.1",
+    "multiparty": "^4.2.3",
+    "sharp": "^0.32.6",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
