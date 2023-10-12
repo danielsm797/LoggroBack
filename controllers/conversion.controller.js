@@ -17,8 +17,6 @@ export const convert = async (req, res) => {
       prevExtension: extension
     }
 
-    console.log('doc :>> ', doc);
-
     const result = await Conversion.create({ doc })
 
     if (result.err) {
