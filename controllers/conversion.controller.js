@@ -26,7 +26,7 @@ export const convert = async (req, res) => {
       .status(200)
       .json({
         success: true,
-        message: 'Conversion has been successfully!'
+        message: 'Imagen procesada y guardada exitosamente!'
       })
 
   } catch (error) {
@@ -37,7 +37,7 @@ export const convert = async (req, res) => {
       .status(500)
       .json({
         success: false,
-        message: 'Has been occurred an error, please try more late'
+        message: 'Ha ocurrido un error, por favor intente de luego más tarde'
       })
   }
 }
@@ -87,7 +87,7 @@ export const searchByDates = async (req, res) => {
       .status(500)
       .json({
         success: false,
-        message: 'Has been occurred an error, please try more late'
+        message: 'Ha ocurrido un error, por favor intente de luego más tarde'
       })
   }
 }
@@ -123,7 +123,7 @@ export const searchGroupByHour = async (req, res) => {
       .status(500)
       .json({
         success: false,
-        message: 'Has been occurred an error, please try more late'
+        message: 'Ha ocurrido un error, por favor intente de luego más tarde'
       })
   }
 }

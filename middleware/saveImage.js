@@ -29,7 +29,7 @@ export const saveImage = (req, res, next) => {
             .status(200)
             .json({
               success: false,
-              message: `Image format invalid. Only permitted ${VALID_EXTENSION.toString()}`
+              message: `Formato de la imagen inválido. Solo está permitido subir imágenes con formato ${VALID_EXTENSION.toString()}`
             })
         }
 
@@ -66,7 +66,7 @@ export const saveImage = (req, res, next) => {
       .status(500)
       .json({
         success: false,
-        message: 'Has been occurred an error, please try more late'
+        message: 'Ha ocurrido un error, por favor intente de luego más tarde'
       })
   }
 }

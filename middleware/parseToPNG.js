@@ -41,7 +41,7 @@ export const parse = async (req, res, next) => {
       .status(500)
       .json({
         success: false,
-        message: 'Has been occurred an error, please try more late'
+        message: 'Ha ocurrido un error, por favor intente de luego más tarde'
       })
   }
 }
