@@ -12,7 +12,7 @@ Realizar una API Rest en la que se pueda:
       ✅ Fecha y hora de subida
       🕥 Nombre de la persona que la subió
       ✅ Url de la imagen guardada
-2. Buscar registros de imágenes entre fechas
+2. ✅ Buscar registros de imágenes entre fechas
 3. Obtener cantidad de imágenes procesadas agrupadas por horas
 
 El usuario final debe tener la posibilidad de poder subir una imagen y enviarla al

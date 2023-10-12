@@ -4,17 +4,9 @@ export const ConversionSchema = new Schema(
   {
     user:
     {
-      _id:
-      {
-        required: true,
-        type: Types.ObjectId
-      },
-      name:
-      {
-        required: true,
-        type: String,
-        trim: true
-      }
+      required: true,
+      type: String,
+      trim: true
     },
     path:
     {
