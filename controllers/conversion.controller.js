@@ -1,6 +1,7 @@
 import { Conversion } from '../data/conversion.data.js'
 import { logger } from '../config/winston.js'
 import { DateTime } from 'luxon'
+import { getS3Url } from '../utils/s3.js'
 
 export const convert = async (req, res) => {
 
@@ -69,6 +70,19 @@ export const searchByDates = async (req, res) => {
 
     if (result.err) {
       throw result.dta
+    }
+
+    // Generamos la URL para cada imagen
+
+    for (const k of result.dta) {
+
+      const resultUrl = await getS3Url({ path: k.path })
+
+      if (resultUrl.err) {
+        continue
+      }
+
+      k.s3 = resultUrl.dta
     }
 
     res
