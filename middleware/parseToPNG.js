@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url'
 import { resolve } from 'node:path'
 import { rm } from 'node:fs/promises'
 import sharp from 'sharp'
+import { saveToS3 } from '../utils/s3.js'
 
 export const parse = async (req, res, next) => {
 
@@ -23,11 +24,13 @@ export const parse = async (req, res, next) => {
       throw new Error('Error parsing to png')
     }
 
-    const resultDel = await deleteImageTemp(from)
+    const resultDel = await deleteImageTemp({ from })
 
     if (resultDel.err) {
       throw resultDel.dta
     }
+
+    await saveToS3({ to, name })
 
     next()
 
@@ -46,7 +49,7 @@ export const parse = async (req, res, next) => {
   }
 }
 
-const deleteImageTemp = async (path) => {
+const deleteImageTemp = async ({ from }) => {
 
   const obj = {
     dta: null,
@@ -55,7 +58,7 @@ const deleteImageTemp = async (path) => {
 
   try {
 
-    await rm(path)
+    await rm(from)
 
   } catch (error) {
 
